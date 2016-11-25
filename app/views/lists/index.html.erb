@@ -1,0 +1,17 @@
+<% if user_signed_in? %>
+  <h2>Welcome, <%= current.user.email if !current_user.nil? %></h2>
+
+  <h3>Here are all lists:</h3>
+    <% @lists.each do |list| %>
+      <input type="checkbox" class="toggle-all">
+      <label for="toggle-all">Mark as complete:</label>
+      <%= list_to list.name, list %>
+    <% end %>
+
+<% else %>
+
+  <h2>Welcome!</h2>
+  <h3>Group Task Manager</h3>
+  <h4>To get started, the menu icon to Sign Up or Login</h4>
+  
+<% end %>

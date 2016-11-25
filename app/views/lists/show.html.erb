@@ -1,0 +1,6 @@
+<%= render @list.tasks %>
+<% if !@list.tasks.nil? %>
+  <%= button_to "Task Complete", lists_path, :method => "destroy", :class => "destroy" %>
+<% else %>
+  <h4>There are currently no tasks associated to this list!</h4>
+<% end %>

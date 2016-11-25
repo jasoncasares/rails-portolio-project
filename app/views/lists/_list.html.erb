@@ -1,0 +1,8 @@
+<%= form_for(@list) do |list| %>
+    <h4>List Name: <%= list.text_field :name, placeholder: "Create a List" %></h4>
+    <%= list.fields_for :tasks, @list.tasks do |task_field| %>
+      <h4>Task Name: <%= task_field.text_field :title, placeholder: "Create a Task" %></h4>
+    <% end %>
+    <%= list.submit %>
+    <% end %>
+<% end %>
