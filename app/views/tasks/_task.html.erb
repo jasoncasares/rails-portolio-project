@@ -1,1 +1,2 @@
-<label><%= task.name %></label>
+<p><%= task.description %><%= link_to "edit", edit_list_task_path(task) %> </p>
+<p><%= check_box_tag 'completed?', 1, task.completed, disabled: true %></p>

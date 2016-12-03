@@ -1,38 +1,46 @@
 class TasksController < ApplicationController
   before_action :authenticate_user!
 
-  def index
-    @task = Task.all
-  end
+  def new
+    @list = List.find_by(params[:list_id])
+    @task = @list.tasks.build
+   end
 
   def create
-    @task = Task.new(task_params)
-    @task.save
-    flash[:notice] = "Task successfully created."
+    @list = List.find(params[:list_id])
+    @task = @list.tasks.create(task_params)
+    flash[:notice] = "Task created"
 
-    redirect_to task_path(@path)
+    redirect_to list_path(@list)
   end
 
   def edit
-    @task = Task.find(params[:id])
-    @task.update(task_params)
-    flash[:notice] = "Task successfully updated."
+    @list = List.find(params[:list_id])
+     @task = Task.find(params[:id])
+   end
 
-    redirect_to list_path(@task.list)
-  end
+   def update
+     @task = Task.find(params[:id])
+     @task.update(task_params)
+     flash[:notice] = "Task Updated"
+
+     redirect_to list_path(@task.list)
+   end
 
   def destroy
-    @task = Task.find(params[:id])
+    @list = List.find(params[:list_id])
+    @task = @list.tasks.find_by(params[:id])
     @task.destroy
-    flash[:notice] = "Task successfully deleted."
+    flash[:notice] = "Task Deleted"
 
-    redirect_to list_path(@task.list)
+    redirect_to list_path(@list)
   end
+
 
   private
 
   def task_params
-    params.require(:task).permit(:title, :description, :due_date, :status)
+    params.require(:task).permit(:description, :completed)
   end
 
 end

@@ -1,7 +1,8 @@
-class List < ApplicationRecord
-  has_many :tasks
-  has_many :user_lists
-  has_many :users, through: :user_lists
-  validates_presence_of :name, uniqueness: true
-  accepts_nested_attributes_for :tasks
+class List < ActiveRecord::Base
+  has_many :tasks, dependent: :destroy
+  belongs_to :user
+
+  validates :name, presence: true, uniqueness: true
+  validates :due_date, presence: true
+
 end

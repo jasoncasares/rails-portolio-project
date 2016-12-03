@@ -2,40 +2,49 @@ class ListsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @list = List.all
+    @lists = current_user.lists.all
   end
 
   def show
-    @list = List.find(params[:id])
+    @list = current_user.lists.find(params[:id])
   end
 
   def new
-    @list = List.new
+    @list = current_user.lists.build
+  end
+
+  def edit
+    @list = current_user.lists.find(params[:id])
   end
 
   def create
-    @list = List.new(list_params)
-    if @list.save
-    flash[:notice] = "List successfully created."
+    @list = current_user.lists.build(list_params)
 
-      redirect_to @list
+    if @list.save
+     flash[:notice] = "List Created"
+     redirect_to list_path(@list)
     else
-      render :new
+      render 'new'
     end
+  end
+
+  def update
+    @list = List.find(params[:id])
+    @list.update(list_params)
+    flash[:notice] = "List Updated"
+    redirect_to list_path(@list)
   end
 
   def destroy
     @list = List.find(params[:id])
-    @task = Task.find(params[:id])
-    @task.destroy
-    flash[:notice] = "List successfully deleted."
-
-    redirect_to @list
+    @list.destroy
+    flash[:notice] = "List Deleted"
+    redirect_to root_path
   end
 
   private
     def list_params
-      params.require(:list).permit(:name, tasks_attributes: [:title, :description, :due_date, :status])
+      params.require(:list).permit(:name, :due_date)
     end
 
 end

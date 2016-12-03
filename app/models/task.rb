@@ -1,4 +1,4 @@
-class Task < ApplicationRecord
-  belongs_to :lists
-  validates_presence_of :title, :description, :due_date, :status
+class Task < ActiveRecord::Base
+  belongs_to :list
+  validates :description, presence: true, length: { maximum: 150 }
 end
