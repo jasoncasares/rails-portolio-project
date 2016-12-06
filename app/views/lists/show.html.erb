@@ -1,8 +1,17 @@
-<h3><%= @list.name %></h3>
-<p><%= @list.due_date %></p>
+<h4><%= @list.name %></h4>
+<p><%= @list.due_date.strftime("%B %d, %Y") %></p>
 
 <h4>Tasks</h4>
 <%= render @list.tasks %>
+
+<!-- <p>
+  <%= link_to "Load Tasks", list_tasks_path(@list), :class => "load_tasks" %>
+</p> -->
+
+<!-- <div class="tasks">
+  <ol>
+  </ol>
+</div> -->
 
 <%= link_to "Add Task", new_list_task_path(@list) %><br>
 <%= link_to "Edit", edit_list_path(@list) %><br>

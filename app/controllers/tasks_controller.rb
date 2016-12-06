@@ -1,6 +1,13 @@
 class TasksController < ApplicationController
   before_action :authenticate_user!
 
+  # def index
+  #   @tasks = @list.tasks
+  #   raise "Whoops".inspect
+  #   render :layout => false
+  #   render :json => @tasks
+  # end
+
   def new
     @list = List.find_by(params[:list_id])
     @task = @list.tasks.build
