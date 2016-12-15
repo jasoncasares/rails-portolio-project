@@ -1,1 +1,11 @@
-<%= task.description %>  <%= link_to "edit", edit_list_task_path(task) %> <%= check_box_tag 'completed?', 1, task.completed, disabled: true %></p>
+<ul>
+  <li class="<%= "completed" if task.complete? %>">
+    <div class="view">
+      <%= form_for([@list, task]) do |f| %>
+        <%= f.check_box :completed, :class => "toggle", :checked => (true if task.complete?) %>
+        <label><%= task.description %></label>
+        <%= link_to "X", list_task_path(task), method: :delete %>
+      <% end %>
+    </div>
+  </li>
+</ul>

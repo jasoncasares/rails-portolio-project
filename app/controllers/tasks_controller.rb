@@ -2,11 +2,12 @@ class TasksController < ApplicationController
   before_action :authenticate_user!
 
   # def index
-  #   @tasks = @list.tasks
+  #   @list = List.find_by(params[:list_id])
+  #   @tasks = @list.tasks.find_by(params[:id])
   #   raise "Whoops".inspect
   #   render :layout => false
   #   render :json => @tasks
-  # end
+  #  end
 
   def new
     @list = List.find_by(params[:list_id])
@@ -22,8 +23,8 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @list = List.find(params[:list_id])
-     @task = Task.find(params[:id])
+    @list = List.find_by(params[:list_id])
+    @task = Task.find_by(params[:id])
    end
 
    def update
@@ -35,7 +36,7 @@ class TasksController < ApplicationController
    end
 
   def destroy
-    @list = List.find(params[:list_id])
+    @list = List.find_by(params[:list_id])
     @task = @list.tasks.find_by(params[:id])
     @task.destroy
     flash[:notice] = "Task Deleted"
