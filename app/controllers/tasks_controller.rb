@@ -4,8 +4,8 @@ class TasksController < ApplicationController
   # def index
   #   @list = List.find_by(params[:list_id])
   #   @tasks = @list.tasks.find_by(params[:id])
-  #   raise "Whoops".inspect
-  #   render :layout => false
+  #   #raise "Whoops".inspect
+  #   #render :layout => false
   #   render :json => @tasks
   #  end
 
