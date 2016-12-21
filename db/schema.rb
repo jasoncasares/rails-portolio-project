@@ -13,13 +13,13 @@
 ActiveRecord::Schema.define(version: 20161221162048) do
 
   create_table "categories", force: :cascade do |t|
-    t.string   "description"
-    t.integer  "user_id"
+    t.string   "name"
+    t.integer  "task_id"
     t.integer  "list_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["list_id"], name: "index_categories_on_list_id"
-    t.index ["user_id"], name: "index_categories_on_user_id"
+    t.index ["task_id"], name: "index_categories_on_task_id"
   end
 
   create_table "lists", force: :cascade do |t|

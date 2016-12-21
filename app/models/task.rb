@@ -1,5 +1,6 @@
 class Task < ActiveRecord::Base
-  belongs_to :list
+  has_many :lists, :through => :categories
+
   validates :description, presence: true, uniqueness: true, length: { maximum: 150 }
 
   def complete?

@@ -1,5 +1,7 @@
 <h4><%= @list.name %></h4>
-<p>Due: <%= @list.due_date.strftime("%B %d, %Y") %></p>
+Due: <%= @list.due_date.strftime("%B %d, %Y") %><br>
+<%= @list.overdue? %><br>
+
 
 <h4>Tasks</h4>
 <%= render @list.tasks %>
