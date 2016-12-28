@@ -44,7 +44,7 @@ class ListsController < ApplicationController
 
   private
     def list_params
-      params.require(:list).permit(:name, :due_date)
+      params.require(:list).permit(:name, :due_date, :category_attributes => [:name])
     end
 
 end

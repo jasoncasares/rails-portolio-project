@@ -15,8 +15,16 @@
 
 <%= form_for @list do |f| %>
   <%= f.label :name %>
-  <%= f.text_field :name %>
+  <%= f.text_field :name %><br>
   <%= f.label :due_date %>
-  <%= f.date_field :due_date %>
+  <%= f.date_field :due_date %><br>
+
+  <%= f.fields_for :categories do |category_builder| %>
+  <fieldset>
+    <%= category_builder.label :name, 'Category' %>
+    <%= category_builder.text_field :name %><br>
+  </fieldset>
+  <% end %>
+
   <%= f.submit %>
 <% end %>
