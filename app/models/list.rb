@@ -11,10 +11,8 @@ class List < ActiveRecord::Base
     end
   end
 
-  def category_attributes=(category_attributes)
-    category_attributes.each do |category_attributes|
-      self.categories.build(category_attributes)
-    end
+  def categories=(category_attributes)
+    self.categories.build(category_attributes)
   end
 
 

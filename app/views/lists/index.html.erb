@@ -1,6 +1,6 @@
 <% @lists.each do |list| %>
   <h4><%= list.name %></h4>
-  <%= list.categories.name %><br>
+  Category: <%= list.categories.first.try(:name) %><br>
   Due: <%= list.due_date.strftime("%B %d, %Y") %><br>
   <%= list.overdue? %><br>
   <%= link_to "Show", list_path(list) %> |

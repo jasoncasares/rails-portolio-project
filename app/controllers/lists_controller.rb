@@ -20,7 +20,7 @@ class ListsController < ApplicationController
   def create
     @list = current_user.lists.build(list_params)
 
-    if @list.save
+    if @list.save!
      flash[:notice] = "List Created"
      redirect_to list_path(@list)
     else
@@ -44,7 +44,7 @@ class ListsController < ApplicationController
 
   private
     def list_params
-      params.require(:list).permit(:name, :due_date, :category_attributes => [:name])
+      params.require(:list).permit(:name, :due_date, :categories => [:name])
     end
 
 end
