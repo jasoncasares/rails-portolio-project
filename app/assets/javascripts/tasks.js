@@ -20,6 +20,28 @@ $(function(){
    })
 })
 
+//Attempt to change rails checkbox to javascript
+// $(function() {
+//     $("#task_completed").click(function() {
+//         $(this).find('input:checkbox').prop("checked", true);
+//     });
+// });
+
+$("#task_completed").bind('change', function(){
+  if (this.checked){
+    var bool = this.checked ? 1 : 0;
+    $.ajax({
+      url: this.action,
+      type: 'POST',
+      data: this.value
+    });
+  }
+  else {
+    alert("no");
+  }
+});
+
+//Add new task via ajax/jquery
 $(function() {
   $("#new_task").submit(function(e) {
     $.ajax({
@@ -31,7 +53,7 @@ $(function() {
       success: function(response) {
         $("#task_description").val("");
         var $ol = $("div.tasks ol")
-        $ol.append("<li>" + response.description + "</li>");
+        $ol.append("<li>" + response.description + " | " + response.completed + "</li>");
       },
     });
     e.preventDefault();
