@@ -1,17 +1,14 @@
 class TasksController < ApplicationController
   before_action :authenticate_user!
 
-  # def index
-  #   @list = List.find_by(params[:list_id])
-  #   @tasks = @list.tasks.find_by(params[:id])
-  #   #raise "Whoops".inspect
-  #   #render :layout => false
-  #   render :json => @tasks
-  #  end
+  def index
+    @list = List.find_by(params[:list_id])
+    @tasks = @list.tasks.find_by(params[:id])
+    render :json => @tasks, include: [:description, :completed]
+   end
 
   def new
     @list = List.find_by(params[:list_id])
-    @task = @list.tasks.build
    end
 
   def create
@@ -19,7 +16,7 @@ class TasksController < ApplicationController
     @task = @list.tasks.create(task_params)
     flash[:notice] = "Task created"
 
-    redirect_to list_path(@list)
+    render json: @task
   end
 
   def edit

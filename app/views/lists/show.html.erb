@@ -1,18 +1,22 @@
 <h4><%= @list.name %></h4>
 Due: <%= @list.due_date.strftime("%B %d, %Y") %><br>
 <%= @list.overdue? %><br>
+<br>
+<h4>Create New Task</h4>
+<%= render :partial => "tasks/form",  :locals => {:task => Task.new} %><br>
 
 
 <h4>Tasks</h4>
 <%= render @list.tasks %>
 
-<!-- <p>
+<p>
   <%= link_to "Load Tasks", list_tasks_path(@list), :class => "load_tasks" %>
 </p>
 
 <div class="tasks">
+  <ol>
+  </ol>
+</div>
 
-</div> -->
-
-<%= link_to "Add Task", new_list_task_path(@list) %><br>
+<!-- <%= link_to "Add Task", new_list_task_path(@list) %><br> -->
 <%= link_to 'Back', lists_path %><br>

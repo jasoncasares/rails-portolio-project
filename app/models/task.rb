@@ -1,4 +1,5 @@
 class Task < ActiveRecord::Base
+  has_many :categories
   has_many :lists, :through => :categories
 
   validates :description, presence: true, uniqueness: true, length: { maximum: 150 }

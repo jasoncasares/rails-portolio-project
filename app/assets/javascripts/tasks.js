@@ -1,43 +1,48 @@
 $(function(){
    $("a.load_tasks").on("click", function(e){
-//     // // Fire some ajax.
-    // $.ajax({
-    //   method: "GET",
-    //   url: this.href,
-    // }).success(function (response) {
-    //   // get a response(variable data)
-    //   $("div.tasks").html(response)
-    //   //Load data into the DOM
-    // }).error(function(notNeeded) {
-    //   alert("Broke!!!!")
-    // });
-//
-//     //Request HTML
-//     // $.get(this.href).success(function(response) {
-//     //   $("div.tasks").html(response)
-//     // })
-//
-     // Requesting JSON
-     $.get(this.href).success(function(json) {
-       debugger
-       // clear the ol html
-        var $ol = $("div.tasks ol")
-        $ol.html("") //emptied the ol
-
-        // iterate over each task within json
-        json.forEach(function(task) {
+     console.log("in handler");
+    // // Fire some ajax.
+    $.ajax({
+      method: "GET",
+      url: this.href,
+      dataType: "json",
+      success: function (task) {
+      // get a response(variable data)
+      var $ol = $("div.tasks ol")
+      $ol.html("") //emptied the ol
+      // iterate over each task within json
+      //console.log(response);
+        //response.forEach(function(task) {
           // with each task data, append an li to the ol with the task content
-          $ol.append("<li>" + task.description + "</li>");
-        })
-      })
+         $ol.append("<li>" + task.description + task.completed + "</li>");
+       //})
 
-       // load that response into the HTML of the page.
-       e.preventDefault();
+      }
+      //Load data into the DOM
+      // load that response into the HTML of the page.
    })
+   return e.preventDefault();
+})
 })
 
-$(function () {
-  $("input.toggle").on("change", function () {
-    $(this).parents("form").trigger("submit")
+$(function() {
+  $("#new_task").submit(function(e) {
+    // need the URL to submit the POST request
+    // need the form data.
+
+    $.ajax({
+      type: "POST",
+      url: this.action,
+      data: $(this).serialize(),
+      dataType: "json",
+      cache: false,
+      success: function(response) {
+        $("#task_description").val("");
+        var $ol = $("div.tasks ol")
+        $ol.append("<li>" + response.description + "</li>");
+      },
+      error: function(e) {console.log(e, "err")}
+    });
+    e.preventDefault();
   })
 })
