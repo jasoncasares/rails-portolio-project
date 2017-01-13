@@ -1,7 +1,7 @@
 $(function(){
    $("a.load_lists").on("click", function(e){
     // // Fire some ajax.
-    console.log(this.href)
+    //console.log(this.href)
 
     $.ajax({
       method: "GET",

@@ -1,5 +1,4 @@
 class ListsController < ApplicationController
-  # look up the responders gem
   before_action :authenticate_user!
 
   def index
