@@ -3,8 +3,8 @@ class TasksController < ApplicationController
 
   def index
     @list = List.find_by(params[:list_id])
-    @tasks = @list.tasks.find_by(params[:id])
-    render :json => @tasks, include: [:description, :completed]
+    @tasks = @list.tasks
+    render :json => @tasks
    end
 
   def new
@@ -16,7 +16,7 @@ class TasksController < ApplicationController
     @task = @list.tasks.create(task_params)
     flash[:notice] = "Task created"
 
-    render json: @task
+    render json: @list.tasks
   end
 
   def edit

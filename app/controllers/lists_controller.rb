@@ -1,13 +1,20 @@
 class ListsController < ApplicationController
+  # look up the responders gem
   before_action :authenticate_user!
 
   def index
     @lists = current_user.lists.all
+    respond_to do |format|
+      format.json {
+        render json: @lists
+      }
+      format.html
+    end
+
   end
 
   def show
     @list = current_user.lists.find(params[:id])
-
   end
 
   def new
